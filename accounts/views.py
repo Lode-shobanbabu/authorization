@@ -75,15 +75,42 @@ def verify_email(request, uidb64, token):
 
 def login_view(request):
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
+        username_or_email = request.POST.get('username')
+        password = request.POST.get('password')
 
-        user = authenticate(request, username=username, password=password)
-        if user:
-            login(request, user)
-            return redirect('dashboard')
-        else:
-            messages.error(request, "Invalid username or password")
+        # Step 1: Find user by email OR username
+        try:
+            user_obj = User.objects.get(email=username_or_email)
+        except User.DoesNotExist:
+            try:
+                user_obj = User.objects.get(username=username_or_email)
+            except User.DoesNotExist:
+                messages.error(request, "Invalid username/email or password")
+                return redirect('login')
+
+        # Step 2: Block inactive users BEFORE authentication
+        if not user_obj.is_active:
+            messages.error(
+                request,
+                "Your account is not activated yet. Please check your email and complete the verification to continue."
+            )
+            return redirect('login')
+
+        # Step 3: Authenticate password
+        user = authenticate(
+            request,
+            username=user_obj.username,
+            password=password
+        )
+
+        if user is None:
+            messages.error(request, "Invalid username/email or password")
+            return redirect('login')
+
+        # Step 4: Login verified user
+        login(request, user)
+        messages.success(request, "Login successful")
+        return redirect('dashboard')
 
     return render(request, 'login.html')
 
