@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+</head>
+<body style="margin:0; padding:0; font-family:Arial; background:#f4f6f8;">
+
+<!-- LEFT SIDEBAR -->
+<div style="
+    width:220px;
+    height:100vh;
+    background:#2c3e50;
+    position:fixed;
+    left:0;
+    top:0;
+    padding-top:30px;
+">
+
+    <h3 style="color:white; text-align:center; margin-bottom:30px;">
+        Dashboard
+    </h3>
+
+    <a href="#"
+       style="display:block; padding:12px 20px; color:white; text-decoration:none;">
+        About Us
+    </a>
+
+    <a href="#"
+       style="display:block; padding:12px 20px; color:white; text-decoration:none;">
+        Services
+    </a>
+
+    <a href="#"
+       style="display:block; padding:12px 20px; color:white; text-decoration:none;">
+        Blog
+    </a>
+
+    <a href="#"
+       style="display:block; padding:12px 20px; color:white; text-decoration:none;">
+        Contact Us
+    </a>
+</div>
+
+<!-- TOP BAR -->
+<div style="
+    margin-left:220px;
+    height:60px;
+    background:#ffffff;
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    padding:0 30px;
+    box-shadow:0 2px 5px rgba(0,0,0,0.1);
+">
+
+    <a href="/logout/"
+       style="
+       background:#dc3545;
+       color:white;
+       padding:8px 18px;
+       text-decoration:none;
+       border-radius:5px;
+       font-weight:bold;
+       ">
+        Logout
+    </a>
+</div>
+
+<!-- MAIN CONTENT -->
+<div style="
+    margin-left:220px;
+    padding:40px;
+    text-align:center;
+">
+
+    <h1 style="color:#333;">
+        Welcome to Dashboard
+    </h1>
+
+    <h2 style="color:#007bff;">
+        {{ request.user.username }}
+    </h2>
+
+</div>
+
+</body>
+</html>

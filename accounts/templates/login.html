@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body style="margin:0; padding:0; background:#f2f2f2; font-family:Arial;">
+
+<form method="post"
+style="width:320px; margin:120px auto; background:#fff; padding:25px; border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.2);">
+
+    {% csrf_token %}
+
+    <h2 style="text-align:center; margin-bottom:20px; color:#333;">Login</h2>
+
+    <!-- ERROR MESSAGE -->
+    {% if messages %}
+        {% for message in messages %}
+            <p style="color:red; text-align:center; margin-bottom:10px;">
+                {{ message }}
+            </p>
+        {% endfor %}
+    {% endif %}
+
+    <input name="username" placeholder="Username"
+    style="width:100%; padding:10px; margin-bottom:12px; border:1px solid #ccc; border-radius:5px;">
+
+    <input type="password" name="password" placeholder="Password"
+    style="width:100%; padding:10px; margin-bottom:15px; border:1px solid #ccc; border-radius:5px;">
+
+    <button type="submit"
+    style="width:100%; padding:10px; background:#007bff; color:white; border:none; border-radius:5px; cursor:pointer;">
+        Login
+    </button>
+
+    <div style="text-align:center; margin-top:12px;">
+        <a href="/forgot-password/" style="text-decoration:none; color:#007bff;">
+            Forgot Password?
+        </a>
+    </div>
+
+    <div style="text-align:center; margin-top:15px;">
+        <span>New user?</span>
+        <a href="/register/" style="color:#28a745; font-weight:bold;">
+            Register
+        </a>
+    </div>
+
+</form>
+
+</body>
+</html>
