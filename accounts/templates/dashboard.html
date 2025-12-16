@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +26,8 @@
         About Us
     </a>
 
-    <a href="#"
+    <!-- ✅ SERVICES -->
+    <a href="{% url 'services' %}"
        style="display:block; padding:12px 20px; color:white; text-decoration:none;">
         Services
     </a>
@@ -52,35 +54,17 @@
     padding:0 30px;
     box-shadow:0 2px 5px rgba(0,0,0,0.1);
 ">
-
     <a href="/logout/"
-       style="
-       background:#dc3545;
-       color:white;
-       padding:8px 18px;
-       text-decoration:none;
-       border-radius:5px;
-       font-weight:bold;
-       ">
+       style="background:#dc3545; color:white; padding:8px 18px;
+       text-decoration:none; border-radius:5px;">
         Logout
     </a>
 </div>
 
 <!-- MAIN CONTENT -->
-<div style="
-    margin-left:220px;
-    padding:40px;
-    text-align:center;
-">
-
-    <h1 style="color:#333;">
-        Welcome to Dashboard
-    </h1>
-
-    <h2 style="color:#007bff;">
-        {{ request.user.username }}
-    </h2>
-
+<div style="margin-left:220px; padding:40px; text-align:center;">
+    <h1>Welcome to Dashboard</h1>
+    <h2 style="color:#007bff;">{{ request.user.username }}</h2>
 </div>
 
 </body>

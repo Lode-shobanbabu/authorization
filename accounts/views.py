@@ -10,6 +10,15 @@ from django.utils.encoding import force_bytes, force_str
 from django.contrib.auth.tokens import default_token_generator
 
 
+
+
+# services 
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from .models import Service
+
+
 def register_view(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -191,3 +200,56 @@ def reset_password(request, uidb64, token):
 
     return render(request, 'reset_password.html')
 
+
+
+# services page
+
+# ================= SERVICES LIST =================
+@login_required
+def services_list(request):
+    services = Service.objects.all()
+    return render(request, 'services.html', {'services': services})
+
+
+# ================= CREATE SERVICE =================
+@login_required
+def create_service(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+
+        Service.objects.create(
+            title=title,
+            description=description
+        )
+
+        messages.success(request, "Service created successfully")
+        return redirect('services')
+
+    return render(request, 'create_service.html')
+
+
+# ================= UPDATE SERVICE =================
+@login_required
+def update_service(request, id):
+    service = get_object_or_404(Service, id=id)
+
+    if request.method == 'POST':
+        service.title = request.POST.get('title')
+        service.description = request.POST.get('description')
+        service.save()
+
+        messages.success(request, "Service updated successfully")
+        return redirect('services')
+
+    return render(request, 'update_service.html', {'service': service})
+
+
+# ================= DELETE SERVICE =================
+@login_required
+def delete_service(request, id):
+    service = get_object_or_404(Service, id=id)
+    service.delete()
+
+    messages.success(request, "Service deleted successfully")
+    return redirect('services')

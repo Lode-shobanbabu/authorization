@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Service</title>
+</head>
+<body style="font-family:Arial; background:#f2f2f2;">
+
+<form method="post"
+style="width:400px; margin:80px auto; background:white; padding:25px; border-radius:8px;">
+    {% csrf_token %}
+
+    <h2>Create Service</h2>
+
+    <input type="text" name="title" placeholder="Service Title"
+    style="width:100%; padding:10px; margin-bottom:10px;" required>
+
+    <textarea name="description" placeholder="Service Description"
+    style="width:100%; padding:10px; margin-bottom:15px;" required></textarea>
+
+    <button type="submit"
+    style="background:#28a745; color:white; padding:10px; width:100%;">
+        Save
+    </button>
+</form>
+
+</body>
+</html>
